@@ -1,0 +1,83 @@
+.nameBox {
+    width: 75%; /* Full width */
+    padding: 5px; /* Some padding */  
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 5px; /* Add a top margin */
+    margin-bottom: 5px; /* Bottom margin */
+    resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+  
+  }
+  
+  .textBox {
+    overflow:scroll; 
+  
+    width: 80%; /* Full width */
+    height: 500px;
+    padding: 5px; /* Some padding */  
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 5px; /* Add a top margin */
+    margin-bottom: 5px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+  }
+  
+  #fileInfo{
+    display:block;
+  
+    overflow-x:hidden; 
+    width:50%;
+    height:100px;
+    padding: 12px; /* Some padding */  
+    border: 1px solid black;; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+  }
+  
+  
+  #fileAttach{
+    margin:1px;
+    border: 1px solid #dadada;
+    padding-bottom:5px;
+    width:90%;
+  
+    padding-left:5px;
+    font-size: 12px; font-weight: 500;
+    color:black;
+    text-decoration: none;
+  }  
+  a#fileAttachText{
+    width: 80%;
+    float:left;
+    padding-left:5px;
+    font-size: 12px; font-weight: 500;
+    color:black;
+    text-decoration: none;
+  }
+  a:hover#fileAttachText{ 
+    color: grey; text-decoration: underline;
+  }
+          .lineTitle{
+             width: 70%;
+             padding:5px;
+  
+             line-height: 30px;font-size: 18px; font-weight: 600;
+  
+             float:left;
+            }
+            .lineTime{
+             width: 10%;
+             text-align:right;
+             line-height: 30px;font-size: 14px; font-weight: 300;
+          
+             float:left;
+             }
+            .lineSub{
+             width: 80%;
+             padding:5px;
+             border-bottom: 5px solid #dadada;
+  
+             line-height: 25px;font-size: 13px; font-weight: 500;
+           
+            }

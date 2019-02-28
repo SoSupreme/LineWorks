@@ -1,0 +1,50 @@
+<div class="text">
+        <h3>나의 메일함</h3>
+  
+</div>
+<div>
+        나만의 메일함을 추가/삭제하거나 이름을 변경할 수 있습니다.
+        <div class="wrapAddBox">
+                <form>
+                   <span> 메일함 추가(20자 이내)</span>
+                   <input class="addBox" id="boxName" placeholder="추가할 메일함 이름을 입력해주세요">
+                  <input class="addBoxButton" id = "clickAddBox" value="추가">
+                  </form>
+        </div> 
+       <div class="folderSort">기본 메일함</div>
+        <%folderInfoView.data.folderList.forEach(function(folder){ %>
+            <%if(folder.folderSN <= 6){ %>
+
+             <div class="myMailFolderList">
+                  <div class="fname"><%= folder.folderName%></div>
+                  <div class="fmailNumber"><%= folder.unreadMailCount%> / <%= folder.mailCount%></div>
+                  <div class="fsize"> <%= folder.usage%> byte</div>
+             </div>
+             <% } %>
+         <% }); %>
+         <div class="folderSort"> 개인 메일 함</div>
+         <%folderInfoView.data.folderList.forEach(function(folder){ %>
+            <%if(folder.folderSN > 6){ %>
+                <% var folderNumber = Number(folder.folderSN); %>
+
+             <div class="myMailFolderList">
+                  <div class="fname"><%= folder.folderName%></div>
+                  <div class="fmailNumber"><%= folder.unreadMailCount%> / <%= folder.mailCount%></div>
+                  <div class="fsize"> <%= folder.usage%> byte</div>
+                  
+                  <div class="edit_input">
+                      <input type="text" style="width:100px"> 
+                      <input type="button" class = "editButton" style="width:40px" value="변경">
+                  </div>
+                  
+                  <div class="fdelete" id="<%=folderNumber %>">
+                        <i class="fa fa-ban" aria-hidden="true"></i> 
+                  </div>
+                 
+                  <div class="fedit">
+                      <i class="fa fa-wrench" aria-hidden="true"></i> 
+                 </div>
+             </div>
+             <% } %>
+         <% }); %>
+</div>    

@@ -1,0 +1,108 @@
+<div class="text" id ="<%=folderNumber %>">
+             
+    <%  var mailCount = Number(mailInfoView.data.totalCount);
+      var pageSize = Number(mailInfoView.data.pageSize);
+      var lastPage = Number(mailInfoView.data.lastPage);
+      var currPage = Number(foldNumber.FN.page);
+      var num = pageSize;
+      var firstpage = Number(firstpage);
+
+      if(mailCount < pageSize){
+          num = mailCount;
+      }
+      if(currPage == lastPage){
+          var sum = pageSize*(lastPage-1);
+          num = mailCount - sum;
+      }
+      %>
+   <h3><%=mailInfoView.data.folderName%></h3>
+</div>
+
+<div class = "wrap-btn">
+<div class="btn-group">
+       <button id="mark">중요</button>
+       <!--<button id="makeRead">읽음</button>
+       <button id="makeUnread">안읽음</button>-->
+       <button id="delete">삭제</button>
+       <button id="tog">읽음</button>
+</div> 
+</div>
+            
+<div>
+    <li class="mail-rows" style="background-color:#f2f2f2;">
+    <div>       
+       <div class="input" style="text-align:center;">
+               <i id="all" class="fa fa-user-circle" aria-hidden="true"></i>
+       </div>
+       <div class="sender" style="text-align:center;font-size:13px;font-weight: 600;">보낸사람</div>
+       <div class="subject"  style="text-align:center;font-size:13px;font-weight:600;">메일 제목</div>
+       <div class="mailTime"  style="text-align:right;font-size:13px;font-weight:600;">받은 시간</div>
+
+</li>
+<% var folderNumber = Number(foldNumber.FN.folderSN); %>
+        
+   <% if(folderNumber != 2){for(var i = 0; i<num;i++){ %> 
+           <%stat = mailInfoView.data.mailData[i].status %> 
+          
+       <li class="mail-rows">
+           
+           <div class="input" id="<%=stat%>">
+                  
+                   <%if(stat == 0){ %>
+                       <div class="star"><i class="fa fa-star-o"></i></div>
+                       <div class= "envelope"> <i class="fa fa-envelope" aria-hidden="true"></i></div>
+                   <% }else if(stat == 1){ %>
+                       <div class="star"><i class="fa fa-star-o"></i></div>
+                       <div class= "envelope"> <i class="fa fa-envelope-open-o" aria-hidden="true"></i></div>
+                   <% }else if(stat == 2){ %>
+                       <div class="star"><i class="fa fa-star"  style="color:#f9622e"></i></div>
+                       <div class= "envelope"> <i class="fa fa-envelope" aria-hidden="true"></i></div>
+                   <% }else if(stat == 3){ %>
+                       <div class="star"><i class="fa fa-star"  style="color:#f9622e"></i></div>
+                       <div class= "envelope"> <i class="fa fa-envelope-open-o" aria-hidden="true"></i></div>
+                   <% } %>                                
+                   <input class="check" type="checkbox" name = "<%=mailInfoView.data.mailData[i].mailSN%>" value = <%=folderNumber%>>
+           </div>  
+           <div class="sender"><%=mailInfoView.data.mailData[i].from.name%></div>
+           <a class="normalLink" onclick="return" id="/read/readMail?mailSN=<%=mailInfoView.data.mailData[i].mailSN%>&IDT=<%=IDT%>"><div class="subject"><%=mailInfoView.data.mailData[i].subject%></div></a>
+           <%                                                       
+           var a = new Date(mailInfoView.data.mailData[i].receivedTime * 1000);
+           var year = a.getFullYear();var month = a.getMonth() + 1;var date = a.getDate();var hour = a.getHours();var min = a.getMinutes();var sec = a.getSeconds();
+           var today = new Date();var thisYear = today.getFullYear();var thisMonth = today.getMonth() + 1;var thisDate = today.getDate();var time = hour + ':' + min;
+
+           if(year == thisYear && month == thisMonth && date == thisDate){ time = time; }
+           else{
+               if(year == thisYear){ time = month + '-' + date + ' ' + time; }
+               else{ time = year + ' ' + month + '-' + date + ' ' + time; }
+           }
+           %>
+           <div class="mailTime"><%=time%></div>
+       </li>
+   <% }};%>
+</div>
+
+<div class="pageNum" id="<%=firstPage%>">
+( <%=currPage %>  / <%= lastPage %> )<br>
+<% var folderNumber = Number(foldNumber.FN.folderSN); %>
+<i class="fa fa-arrow-left" aria-hidden="true" id = "previousArrow"style="cursor:pointer;"></i>
+<% if(lastPage <=5){ %>
+<% for(var i = 1;i<=lastPage;i++){ %>       
+<a class="pageNumbering" style="cursor: pointer;" onclick="return" id="/getMail?folderSN=<%=folderNumber%>&page=<%=i %>&firstPage=<%= firstPage %>&IDT=<%=IDT%>"><%= i %></a>
+<% }} else{%>
+<% var idx = 0; while(idx < 5){%>
+<a class="pageNumbering" style="cursor: pointer;"onclick="return"  id="/getMail?folderSN=<%=folderNumber%>&page=<%=Number(firstPage) + Number(idx) %>&firstPage=<%= firstPage %>&IDT=<%=IDT%>"><%= Number(firstPage) + Number(idx) %></a>
+<% idx++;%>
+<%if((Number(firstPage) + Number(idx)) > lastPage){break;} %>
+<% } }%>
+
+<i class="fa fa-arrow-right" aria-hidden="true" id = "nextArrow" style="cursor:pointer;"></i>
+<%lastPage = Number(mailInfoView.data.lastPage); %>          
+</div>
+<div class="lpCheck" id="<%=lastPage%>"></div>
+
+<div id = "pageInfo">
+    <div style="display:none" id = "<%=firstPage%>"></div>
+    <div style="display:none" id = "<%=currPage%>"></div>
+</div>
+
+<div class= "saveState" id = "/getMail?folderSN=<%=folderNumber%>&page=<%=currPage %>&firstPage=<%= firstPage %>&IDT=<%=IDT%>"></div>

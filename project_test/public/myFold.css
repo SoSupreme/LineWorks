@@ -1,0 +1,100 @@
+    
+.addBox{
+  width: 80%; /* Full width */
+  height:20px;
+  padding: 12px; /* Some padding */  
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+.addBoxButton {
+  background-color: #f9622e;
+  width: 50px;
+  height: 20px;
+  color: white;
+  font-size: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+.addBoxButton:hover {
+  background-color: grey;
+}
+
+/* Add a background color and some padding around the form */
+.wrapAddBox {
+  margin-top:5px;
+  width: 30%;
+  border-radius: 5px;
+  color:black;
+  background-color: #f2f2f2;
+  padding: 5px;
+} 
+
+.folderSort {
+  margin-top:5px;
+  width: 60%;
+  border-radius: 5px;
+  color:black;
+  background-color: #f2f2f2;
+  padding: 5px;
+
+  line-height: 30px; 
+  font-size: 18px; 
+  font-weight: 600;
+} 
+
+.myMailFolderList{
+width: 60%;
+border-bottom: 1px solid  #f2f2f2;
+list-style: none; 
+line-height: 25px; 
+font-size:15px; 
+color: #333;
+overflow: hidden;
+}
+.fmailNumber{
+            width: 10%;
+            float:left;
+            text-align:center;
+}
+.fname{
+            width: 45%;
+            float:left;
+ }
+.fsize{
+            width: 15%;
+            float:left;
+            text-align:center;
+
+}
+.fedit{
+            width: 5%;
+            float:right;
+            cursor: pointer;
+            text-align:center;
+}
+.edit_input{
+            width: 20%;
+            float:left;
+            display:none;
+            text-align:center;
+
+
+}
+.fdelete{
+            width: 5%;
+            float:right;
+            cursor: pointer;
+            text-align:center;
+}

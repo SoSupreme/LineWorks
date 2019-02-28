@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang='ko'>
+  <head>
+    <title>Mail Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://localhost:443/default.css">
+      <style>
+  
+     /* Style inputs with type="text", select elements and textareas */
+ input[type=text], select {
+  width: 73%; /* Full width */
+  padding: 5px; /* Some padding */  
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 5px; /* Add a top margin */
+  margin-bottom: 5px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+textarea {
+  width: 80%; /* Full width */
+  padding: 12px; /* Some padding */  
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+/* Style the submit button with a specific background color etc */
+input[type=submit] {
+  background-color: #f9622e;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+input[type=submit]:hover {
+  background-color: #00c73c;
+}
+
+#fileInfo{
+  display:none;
+
+  overflow-x:hidden; 
+  width:50%;
+  height:100px;
+  padding: 12px; /* Some padding */  
+  border: 1px solid #dadada; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+}
+
+.goToMyMail {
+  margin-top:5px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 5px;
+
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  color:black;
+} 
+
+label{
+  line-height: 30px;font-size: 13px; font-weight: 600;
+  width:7%;
+  float:left;
+}       
+.fileAttach{
+  margin:1px;
+  border: 1px solid #dadada;
+  padding-bottom:5px;
+  width:90%;
+
+  padding-left:5px;
+  font-size: 12px; font-weight: 500;
+  color:black;
+  text-decoration: none;
+} 
+.fSpan{
+  width:80%;
+  float:left;
+}
+#totalFile{
+  font-size: 12px; font-weight: 500;
+}
+#deleteAll{
+  padding-right:5px;
+  color : red;
+  cursor: pointer;
+}
+</style>
+  </head> 
+  <body>
+        <nav>
+
+                <div class="upperList">
+                        <h1 class="logo-title">Mail</h1>
+
+                    </div>
+                    <div class="upperList">
+                             <a href="/getMail?folderSN=-1&page=1&firstPage=1&firstPage=1&IDT=<%=IDT%>"> <p class="home"><i class="fa fa-home"></i></p> </a>
+                        </div>
+                        <span class = "userInfo" id = <%=IDT%>><%=IDT%>님 접속을 환영합니다.</span>                            
+          </nav>
+          
+      <aside>   
+        <div>
+
+          <%folderInfoView.data.folderList.forEach(function(folder){ %>
+         
+             <%if(folder.folderSN != 2 && folder.folderSN <= 6){ %>
+              <div class="mailList">
+                    
+                          <%if(folder.folderSN != 4 && folder.folderSN != 5){ %>
+                              <i class="fa fa-folder"></i>
+                              <% } %>
+                              <%if(folder.folderSN == 4 || folder.folderSN == 5){ %>
+                                  <i class="fa fa-trash"></i>
+                                  <% } %>  
+                                  <a class = "menuText" href="/getMail?folderSN=<%=folder.folderSN %>&page=1&firstPage=1&IDT=<%=IDT%>"><%= folder.folderName%></a>
+                                  (<%=folder.unreadMailCount %> / <%=folder.mailCount %>)
+                     
+              </div>
+              <% } %>
+          <% }); %>
+      </div>
+      <div class = "line"></div>
+          <div class="writeButton">
+                  <i class="fa fa-pencil"></i>
+                  <a class = "writeMenuText" href="/write/write?IDT=<%=IDT%>">메일쓰기</a>
+          </div>
+      <div class = "line"></div>   
+      <div class="goToMyMail">
+        <a href="/myFolder/myFolderList?IDT=<%=IDT%>" class="folderMenuText">나의 메일함</a> 
+        <i class="fa fa-hand-o-down" aria-hidden="true" style="margin-left:50px"></i>
+    </div> 
+    <div id = "showBox">
+    <%folderInfoView.data.folderList.forEach(function(folder){ %>
+    
+        <%if(folder.folderSN > 6){ %>
+         <div class="mailList2">
+                 <a class = "menuText2" href="/getMail?folderSN=<%=folder.folderSN %>&page=1&firstPage=1&IDT=<%=IDT%>"><i class="fa fa-smile-o" aria-hidden="true"></i>
+                    <%= folder.folderName%></a>
+         </div>
+        <% } %>
+     <% }); %>
+    </div>
+    </aside>
+      
+      <section>
+          <div class="text">
+             <h3>메일쓰기</h3>
+          </div>
+
+          <div class="container">
+            <form action="/write/writeMail?IDT=<%=IDT%>" method="POST" enctype="multipart/form-data">
+
+              <label for="sname">보내는 사람</label>
+              <input type="text" id="sname" name="sender" placeholder="조준호"><br>
+          
+              <label for="fname">받는사람</label>
+              <input type="text" id="fname" name="receiver" placeholder="abac@worksmobile.com..."><br>
+          
+              <label for="tname">제목</label>
+              <input type="text" id="tname" name="title" placeholder="title.."><br>
+
+             <label for="fileName">파일첨부</label>
+              <input type="file" id ="fileName" name="files" multiple="multiple" value="attatch"><span id ="totalFile"> </span><br>  
+              <div id="fileInfo">
+              </div><br>
+              <!--<label for="subject">본문</label><br>-->
+              <textarea id="subject" name="subject" placeholder="Hello, World!" style="height:350px;"></textarea>
+              <br>
+             <div id = "tempWrap"><input type="submit" value="Submit" id="getSend" disabled="true" style="background-color:black"></div>
+          
+            </form>
+          </div> 
+         
+          
+          <div class="text"></div>
+          
+        </div>
+          
+ 
+      </section>
+      <nav>
+      </nav>
+  </body>
+  <script src="http://localhost:443/write.js">
+ 
+  </script>
+</html>

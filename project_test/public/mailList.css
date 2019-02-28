@@ -1,0 +1,91 @@
+
+         .mail-rows{
+            width:80%;
+            border-bottom: 1px solid #f1f1f1;
+            list-style: none; 
+            line-height: 25px; 
+            font-size:15px; 
+            color: #333;
+            overflow: hidden;
+       }
+       .star{
+          float:left;
+          margin-right:5%;
+          cursor: pointer;
+       }
+      .envelope{
+           float:left;
+           margin-right:5%;
+           cursor: pointer;
+       }
+       .input{
+          width: 5%;
+          float:left;
+          
+       }
+       .subject{
+          width: 65%;
+          text-overflow: ellipsis;
+          overflow:hidden;
+          white-space:nowrap;
+          float:left;
+          font-size : 12px;
+          padding-right : 15px;
+       }
+       .sender{
+          width: 10%;
+          text-overflow: ellipsis;
+          overflow:hidden;
+          white-space:nowrap;
+          float:left;
+          font-size : 12px;
+          padding-right : 15px;
+       }
+       .mailTime{
+          width: 10%;
+          float:right;
+          font-size : 12px;
+          text-align:right;
+          padding-right:5px;
+       }
+       .pageNum{
+          width:80%;
+          border-top: 1px solid #dadada;
+          background-color:  #f2f2f2;
+          padding-left: 0px;
+          text-align:center;
+       }
+.wrap-btn{
+  margin-top: 10px;
+  margin-bottom:10px;
+  list-style: none; 
+  line-height: 25px; 
+  font-size:15px; 
+  overflow: hidden;
+}
+.btn-group button {
+margin-right: 2px;
+border-radius: 5px;
+background-color: #f1f1f1; /* Green background */
+border: 1px solid #333; /* Green border */
+color: black; /* White text */
+padding: 5px 20px; /* Some padding */
+cursor: pointer; /* Pointer/hand icon */
+float: left; /* Float the buttons side by side */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+background-color: grey;
+} 
+.pageNumbering{
+  text-decoration : none;
+  font-size: 14px; font-weight: 500;
+  color:black;
+}
+#all{
+  cursor: pointer;
+}
+#all:hover{
+  color: #00c73c;
+}

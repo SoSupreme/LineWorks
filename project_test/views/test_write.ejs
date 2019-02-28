@@ -1,0 +1,35 @@
+<div class="text">
+        <h3>메일쓰기</h3>
+     </div>
+
+     <div class="container">
+       <form id="sendForm" action="/write/writeMail?IDT=<%=IDT%>" method="POST" enctype="multipart/form-data">
+
+         <label for="sname">보내는 사람</label>
+         <input type="text" id="sname" name="sender" placeholder="조준호"><br>
+     
+         <label for="fname">받는사람</label>
+         <input type="text" id="fname" name="receiver" placeholder="abac@worksmobile.com..."><br>
+     
+         <label for="tname">제목</label>
+         <input type="text" id="tname" name="title" placeholder="title.."><br>
+
+        <label for="fileName">파일첨부</label>
+         <input type="file" id ="fileName" name="files" multiple="multiple" value="attatch"><span id ="totalFile"> </span><br>  
+         <div id="fileInfo">
+         </div><br>
+         <!--<label for="subject">본문</label><br>-->
+         <textarea id="subject" name="subject" placeholder="Hello, World!" style="height:350px;"></textarea>
+         <br>
+        <div id = "tempWrap"><button onclick="return false" id="getSend" disabled="true" style="background-color:black">보내기</button></div>
+     
+       </form>
+     </div> 
+    
+     
+     <div class="text"></div>
+     
+   </div>
+
+
+     

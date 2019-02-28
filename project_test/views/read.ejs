@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang='ko'>
+  <head>
+    <title>Mail Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://localhost:443/default.css">
+      <style>
+.nameBox {
+  width: 75%; /* Full width */
+  padding: 5px; /* Some padding */  
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 5px; /* Add a top margin */
+  margin-bottom: 5px; /* Bottom margin */
+  resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+
+}
+
+.textBox {
+  overflow:scroll; 
+
+  width: 80%; /* Full width */
+  height: 500px;
+  padding: 5px; /* Some padding */  
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 5px; /* Add a top margin */
+  margin-bottom: 5px; /* Bottom margin */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+#fileInfo{
+  display:block;
+
+  overflow-x:hidden; 
+  width:50%;
+  height:100px;
+  padding: 12px; /* Some padding */  
+  border: 1px solid black;; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+}
+
+
+#fileAttach{
+  margin:1px;
+  border: 1px solid #dadada;
+  padding-bottom:5px;
+  width:90%;
+
+  padding-left:5px;
+  font-size: 12px; font-weight: 500;
+  color:black;
+  text-decoration: none;
+}  
+a#fileAttachText{
+  width: 80%;
+  float:left;
+  padding-left:5px;
+  font-size: 12px; font-weight: 500;
+  color:black;
+  text-decoration: none;
+}
+a:hover#fileAttachText{ 
+  color: grey; text-decoration: underline;
+}
+        .lineTitle{
+           width: 70%;
+           padding:5px;
+
+           line-height: 30px;font-size: 18px; font-weight: 600;
+
+           float:left;
+          }
+          .lineTime{
+           width: 10%;
+           text-align:right;
+           line-height: 30px;font-size: 14px; font-weight: 300;
+        
+           float:left;
+           }
+          .lineSub{
+           width: 80%;
+           padding:5px;
+           border-bottom: 5px solid #dadada;
+
+           line-height: 25px;font-size: 13px; font-weight: 500;
+         
+          }
+</style>
+  </head> 
+  <body>
+        <nav>
+
+                <div class="upperList">
+                        <h1 class="logo-title">Mail</h1>
+
+                    </div>
+                    <div class="upperList">
+                             <a href="/getMail?folderSN=-1&page=1&firstPage=1&IDT=<%=IDT%>"> <p class="home"><i class="fa fa-home"></i></p> </a>
+                        </div>
+                        <span class = "userInfo" id = <%=IDT%>><%=IDT%>님 접속을 환영합니다.</span>                            
+          </nav>
+          
+      <aside>   
+        <div>
+
+          <%folderInfoView.data.folderList.forEach(function(folder){ %>
+         
+             <%if(folder.folderSN != 2 && folder.folderSN <= 6){ %>
+              <div class="mailList">
+                    
+                          <%if(folder.folderSN != 4 && folder.folderSN != 5){ %>
+                              <i class="fa fa-folder"></i>
+                              <% } %>
+                              <%if(folder.folderSN == 4 || folder.folderSN == 5){ %>
+                                  <i class="fa fa-trash"></i>
+                                  <% } %>  
+                      <a class = "menuText" href="/getMail?folderSN=<%=folder.folderSN %>&page=1&firstPage=1&IDT=<%=IDT%>"><%= folder.folderName%></a>
+                      (<%=folder.unreadMailCount %> / <%=folder.mailCount %>)
+                     
+              </div>
+              <% } %>
+          <% }); %>
+      </div>
+      <div class = "line"></div>
+      <div class="writeButton">
+              <i class="fa fa-pencil"></i>
+              <a class = "writeMenuText" href="/write/write?IDT=<%=IDT%>">메일쓰기</a>
+      </div>
+  <div class = "line"></div>   
+  <div class="goToMyMail">
+    <a href="/myFolder/myFolderList?IDT=<%=IDT%>" class="folderMenuText">나의 메일함</a> 
+    <i class="fa fa-hand-o-down" aria-hidden="true" style="margin-left:50px"></i>
+</div> 
+<div id = "showBox">
+<%folderInfoView.data.folderList.forEach(function(folder){ %>
+
+    <%if(folder.folderSN > 6){ %>
+     <div class="mailList2">
+             <a class = "menuText2" href="/getMail?folderSN=<%=folder.folderSN %>&page=1&firstPage=1&IDT=<%=IDT%>"><i class="fa fa-smile-o" aria-hidden="true"></i>
+                <%= folder.folderName%></a>
+     </div>
+    <% } %>
+ <% }); %>
+</div>
+</aside>
+      
+      <section>
+          <div class="text">
+             <h3>메일읽기</h3>
+          </div>
+       <div>
+         <% var a = new Date(mailDataView.mailInfo.receivedTime * 1000);
+        var year = a.getFullYear();var month = a.getMonth() + 1;var date = a.getDate();var hour = a.getHours();var min = a.getMinutes();var sec = a.getSeconds();
+        %>
+        <% time = year + '-' + month + '-' + date + ' ' + hour + ':' + min; %>
+        <div style="overflow:hidden">
+        <div class = "lineTitle">
+          <%=mailDataView.mailInfo.subject %>
+        </div>
+         <div class = "lineTime"><%= time %></div>
+         </div>
+        <div class = "lineSub">
+            <% var toLen = mailDataView.mailInfo.toList.length%>
+            <% var sender = String(mailDataView.mailInfo.from.name) + '<' + String(mailDataView.mailInfo.from.email) + '>' %>
+          <div style="overflow:hidden;border-top: 1px solid #dadada;">
+          <div style="width:7%;font-weight:600;vertical-align:top;float:left;"> 보낸사람 </div> 
+          <div style="width:80%;line-height:120%;float:left;">
+           <%=sender%>
+           </div>
+          </div>
+          <div style="border-top: 1px solid #dadada;overflow: hidden;">
+            <%var fromer=''; %>
+            <%for(var i=0;i<toLen;i++){fromer += String(mailDataView.mailInfo.toList[i].name) + '<' + String(mailDataView.mailInfo.toList[i].email) + '>' } %>
+              <div style="width:7%;font-weight:600;vertical-align:top;float:left;">  받은사람 </div> 
+              <div style="width:80%;line-height:120%;float:left;">
+                <%=fromer %>
+              </div>
+          </div>
+       
+        </div>
+        
+       </div>  
+      
+          <% var fileCount = mailDataView.mailInfo.attachCount %>
+          <% var allFileSize = String(mailDataView.mailInfo.attachSizeAll)%>
+          <div class="textBox">
+              <div id="fileInfo" style="height:25px; padding-top:1px; padding-bottom:1px;margin-bottom:2px;">
+                 <span style="font-size: 13px; font-weight: 600;"><i class="fa fa-clipboard" aria-hidden="true"></i>첨부파일</span> <span style="font-size:13px;font-weight:600;color:#f9622e;"> <%= fileCount %>개  </span>  <span style="font-size: 12px; font-weight: 400;">(<%=allFileSize%>)
+            </div>
+              <%if(fileCount != 0){ %>
+
+                <div id="fileInfo">
+    
+              <% for(var i = 0; i< fileCount; i++){ %>
+               <div id = "fileAttach">
+                <a id="fileAttachText" href="/read/getAttach?mailSN=<%=mailDataView.mailInfo.mailSN%>&attachIndex=<%=mailDataView.attachList.attachInfo[i].contentSN%>&contentType=<%=mailDataView.attachList.attachInfo[i].contentType%>&filename=<%=mailDataView.attachList.attachInfo[i].filename%>&IDT=<%=IDT%>" download>
+                  <%=mailDataView.attachList.attachInfo[i].filename%></a><%=mailDataView.attachList.attachInfo[i].humanReadSize%></div>
+              <%  } %>
+              </div>
+              <%}%>
+              <% var string = mailDataView.mailInfo.body;
+              var newString = string.split(' ').join('&nbsp;'); %>
+              <%-string%>
+
+          </div>
+
+          <div class="text"></div>
+          
+        </div>
+          
+ 
+      </section>
+      <nav>                    
+      </nav>
+  </body>
+  <script>
+
+ 
+  </script>
+</html>

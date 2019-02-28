@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang='ko'>
+  <head>
+    <title>Mail Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://localhost:443/default.css">
+      <style>
+         .sendMessageOne{
+            margin-top:40px;
+            font-size: 16px; 
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            text-decoration : none;
+          }
+          .sendMessageTwo{
+            font-size: 13px; 
+            font-weight:500;
+            text-align: center;
+            text-decoration : none;
+            margin-bottom: 10px;
+        }
+          .linkText{
+            text-decoration : none;
+            color : #f9622e;
+          }
+          .sendMessageThree{
+            font-size: 12px; 
+            font-weight: 400;
+            text-align: center;
+            text-decoration : none;
+            color: grey;
+          }                    
+</style>
+  </head>
+  <body>
+        <nav>
+
+                <div class="upperList">
+                        <h1 class="logo-title">Mail</h1>
+
+                    </div>
+                    <div class="upperList">
+                             <a href="/getMail?folderSN=-1&page=1&firstPage=1&IDT=<%=IDT%>"> <p class="home"><i class="fa fa-home"></i></p> </a>
+                        </div>
+                        <span class = "userInfo" id = <%=IDT%>><%=IDT%>님 접속을 환영합니다.</span>                            
+          </nav>
+          
+      <aside>   
+        <div>
+
+            <%folderInfoView.data.folderList.forEach(function(folder){ %>
+           
+               <%if(folder.folderSN != 2 && folder.folderSN <= 6){ %>
+                <div class="mailList">
+                      
+                            <%if(folder.folderSN != 4 && folder.folderSN != 5){ %>
+                                <i class="fa fa-folder"></i>
+                                <% } %>
+                                <%if(folder.folderSN == 4 || folder.folderSN == 5){ %>
+                                    <i class="fa fa-trash"></i>
+                                    <% } %>  
+                                    <a class = "menuText" href="/getMail?folderSN=<%=folder.folderSN %>&page=1&firstPage=1&IDT=<%=IDT%>"><%= folder.folderName%></a>
+                                    (<%=folder.unreadMailCount %> / <%=folder.mailCount %>)
+                       
+                </div>
+                <% } %>
+            <% }); %>
+        </div>
+        <div class = "line"></div>
+            <div class="writeButton">
+                    <i class="fa fa-pencil"></i>
+                    <a class = "writeMenuText" href="/write/write?IDT=<%=IDT%>">메일쓰기</a>
+            </div>
+        <div class = "line"></div>   
+        <div class="goToMyMail">
+          <a href="/myFolder/myFolderList?IDT=<%=IDT%>" class="folderMenuText">나의 메일함</a> 
+          <i class="fa fa-hand-o-down" aria-hidden="true" style="margin-left:50px"></i>
+      </div> 
+      <div id = "showBox">
+      <%folderInfoView.data.folderList.forEach(function(folder){ %>
+      
+          <%if(folder.folderSN > 6){ %>
+           <div class="mailList2">
+                   <a class = "menuText2" href="/getMail?folderSN=<%=folder.folderSN %>&page=1&firstPage=1&IDT=<%=IDT%>"><i class="fa fa-smile-o" aria-hidden="true"></i>
+                      <%= folder.folderName%></a>
+           </div>
+          <% } %>
+       <% }); %>
+      </div>
+      </aside>
+      
+      <section>
+          <div class="text">
+             <h3>메일쓰기</h3>
+          </div>
+
+          <div class="sendMessageOne"> <i class="fa fa-plane" aria-hidden="true"></i> 메일을 성공적으로 보냈습니다.   </div>
+         
+          <div class="sendMessageTwo"><a class="linkText" href="/getMail?folderSN=0&page=1&firstPage=1&IDT=<%=IDT%>" style="color:#00c73c;">받은메일함 가기</a>  |  <a class="linkText" href="/write/write?IDT=<%=IDT%>">메일쓰기</a></div>
+
+          <div class="sendMessageThree">잠시 후 초기 화면으로 돌아갑니다.</div>
+
+          <div class="text"></div>
+          
+          
+        </div>
+          
+ 
+      </section>
+
+      <nav>
+      </nav>
+  </body>
+  <script>
+    setTimeout(function() {
+        location.href="/getMail?folderSN=-1&page=1&firstPage=1&IDT=<%=IDT%>";
+    }, 5000);
+    
+  </script>
+</html>

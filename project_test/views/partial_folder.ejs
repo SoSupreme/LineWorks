@@ -1,0 +1,110 @@
+<nav>
+    <div class="upperList">
+            <h1 class="logo-title">Mail</h1>
+
+        </div>
+        <div class="upperList">
+                             <a style="cursor:pointer;" onclick="return false;" id="/getMail?folderSN=-1&page=1&firstPage=1&IDT=<%=IDT%>"><p class="home"><i class="fa fa-home"></i></p> </a>
+        </div>
+        <span class = "userInfo" id = <%=IDT%>><%=IDT%>님 접속을 환영합니다.</span>                            
+    </nav>
+
+<aside>   
+<div>
+
+<%folderInfoView.data.folderList.forEach(function(folder){ %>
+
+   <%if(folder.folderSN != 2 && folder.folderSN <= 6){ %>
+    <div class="mailList">
+          
+                <%if(folder.folderSN != 4 && folder.folderSN != 5){ %>
+                    <i class="fa fa-folder"></i>
+                    <% } %>
+                    <%if(folder.folderSN == 4 || folder.folderSN == 5){ %>
+                        <i class="fa fa-trash"></i>
+                        <% } %>  
+            <a class = "menuText" onclick="return false;" id="/getMail?folderSN=<%=folder.folderSN %>&page=1&firstPage=1&IDT=<%=IDT%>"><%= folder.folderName%></a>
+    </div>
+    <% } %>
+<% }); %>
+</div>
+<div class = "line"></div>
+<div class="writeButton">
+        <i class="fa fa-pencil"></i>
+        <a class = "writeMenuText" onclick="return false;" style="cursor: pointer;"  id="/write/write?IDT=<%=IDT%>">메일쓰기</a>
+</div>
+<div class = "line"></div>   
+<div class="goToMyMail">
+    <a onclick="return false;" style="cursor: pointer;" id="/myFolder/myFolderList?IDT=<%=IDT%>" class="folderMenuText">나의 메일함</a> 
+    <i class="fa fa-hand-o-down" aria-hidden="true" style="margin-left:50px"></i>
+</div> 
+<div id = "showBox">
+<%folderInfoView.data.folderList.forEach(function(folder){ %>
+
+    <%if(folder.folderSN > 6){ %>
+     <div class="mailList2">
+            <i class="fa fa-smile-o" aria-hidden="true"></i>  <a class = "menuText2" onclick="return false;"style="cursor: pointer;"  id="/getMail?folderSN=<%=folder.folderSN %>&page=1&firstPage=1&IDT=<%=IDT%>"><%= folder.folderName%></a>
+     </div>
+    <% } %>
+ <% }); %>
+</div>
+</aside>
+
+<section>
+
+<div class ="textSection" id = "default">
+
+        <div class="text">
+                <h3>나의 메일함</h3>
+          
+        </div>
+        <div>
+                나만의 메일함을 추가/삭제하거나 이름을 변경할 수 있습니다.
+                <div class="wrapAddBox">
+                        <form>
+                           <span> 메일함 추가(20자 이내)</span>
+                           <input class="addBox" id="boxName" placeholder="추가할 메일함 이름을 입력해주세요">
+                          <input class="addBoxButton" id = "clickAddBox" value="추가">
+                          </form>
+                </div> 
+               <div class="folderSort">기본 메일함</div>
+                <%folderInfoView.data.folderList.forEach(function(folder){ %>
+                    <%if(folder.folderSN <= 6){ %>
+        
+                     <div class="myMailFolderList">
+                          <div class="fname"><%= folder.folderName%></div>
+                          <div class="fmailNumber"><%= folder.unreadMailCount%> / <%= folder.mailCount%></div>
+                          <div class="fsize"> <%= folder.usage%> byte</div>
+                     </div>
+                     <% } %>
+                 <% }); %>
+                 <div class="folderSort"> 개인 메일 함</div>
+                 <%folderInfoView.data.folderList.forEach(function(folder){ %>
+                    <%if(folder.folderSN > 6){ %>
+                        <% var folderNumber = Number(folder.folderSN); %>
+        
+                     <div class="myMailFolderList">
+                          <div class="fname"><%= folder.folderName%></div>
+                          <div class="fmailNumber"><%= folder.unreadMailCount%> / <%= folder.mailCount%></div>
+                          <div class="fsize"> <%= folder.usage%> byte</div>
+                          
+                          <div class="edit_input">
+                              <input type="text" style="width:100px"> 
+                              <input type="button" class = "editButton" style="width:40px" value="변경">
+                          </div>
+                          
+                          <div class="fdelete" id="<%=folderNumber %>">
+                                <i class="fa fa-ban" aria-hidden="true"></i> 
+                          </div>
+                         
+                          <div class="fedit">
+                              <i class="fa fa-wrench" aria-hidden="true"></i> 
+                         </div>
+                     </div>
+                     <% } %>
+                 <% }); %>
+        </div>    
+
+</div>
+
+</section>     

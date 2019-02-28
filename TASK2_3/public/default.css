@@ -1,0 +1,218 @@
+* {
+	font-size : 9pt;
+	padding : 0px;
+	margin : 0px;
+	z-index : 1;
+}
+
+body {
+	overflow : hidden;
+}
+
+#vMachine {
+	top : 20px;
+	left : 100px;
+	overflow : hidden;
+	position : absolute;
+	width : 330px;
+	border : 2 solid #000;
+	padding : 10px 10px 10px 10px;
+	height : 500px;
+	background-color : #ffa333;		
+}
+
+#goodsSection {
+	float : left;
+	width : 320px;
+	height : 200px;
+	padding : 10px 0px 0px 10px;
+	background-color : #ffffff;
+}
+
+.goods {
+	width : 70px;
+	height : 100px;
+	float : left ;
+	padding : 0px 10px 0px 0px;
+}
+
+.product {
+	width : 70px;
+	height : 30px;
+	text-align : center;
+	padding : 20px 0px 20px 0px;
+	background-color : #cccccc;
+	cursor : pointer;
+}
+.product:hover {
+	background-color : #ff0000;
+}
+
+.price{
+  cursor : pointer;
+}
+.price:hover{
+  background-color : #ff0000;
+}
+
+.price {
+	width : 70px;
+	height : 25px;
+	padding : 5px 0px 0px 0px;
+	text-align : center;
+}
+
+#moneySection {
+	float : right;
+	width : 150px;
+	height : 110px;
+	background-color : #fff;
+	margin-top : 10px;
+}
+
+#insertedMoney {
+	width : 150px;
+	height : 16px;
+	padding-top : 4px;
+	text-align : center;
+	background-color : #777777;
+	color : #ffffff;
+}
+
+#coinSlot {
+	width : 150px;
+	height : 55px;
+	padding : 15px 0px 0px 0px;
+	text-align : center;
+	background-color : #ffee99;
+}
+
+#returnButton {
+	width : 150px;
+	height : 16px;
+	padding-top : 4px;
+	text-align : center;
+	background-color : #777777;
+	color : #ffffff;
+	cursor : pointer;
+}
+
+#returnButton:hover {
+	background-color : #ff0000;
+}
+
+#bottomSection {
+	clear : all;
+	padding : 30px 100px 0px 100px;
+	width : 130px;
+	height : 100px;	
+}
+
+#door {
+	width : 130px;
+	height : 100px;
+	background-color : #dd7333;
+}
+
+#myWallet {
+	position : absolute;
+	top : 20px;
+	left : 470px;
+	width : 300px;
+	height : 300px;
+	background-color : #dddddd;
+	padding : 10px 10px 10px 10px;
+}
+
+.moneyType {
+	background-color : #ffffff;
+	width : 280px;
+	height : 50px;
+	padding : 10px 10px 10px 10px;
+}
+
+.moneyImage {
+	width : 70px;
+	height : 30px;
+	text-align : center;
+	padding : 10px 0px 10px 0px;
+	background-color : #cccccc;
+	float : left ;
+}
+
+.moneyValue {
+	width : 170px;
+	padding : 20px 30px 0px 0px;
+	margin-left : 10px;
+	float : left;
+}
+
+#currentMoney {
+	position : absolute;
+	width : 300px;
+	top : 300px;
+	float : right ;
+	color : #777777;
+	text-align : right;
+}
+
+#console {
+	position : absolute;
+	overflow-y : scroll;
+	top : 350px;
+	left : 470px;
+	width : 300px;
+	height : 170px;
+	padding : 10px 10px 10px 10px;
+	background-color : #dddddd;
+	color : #777777;
+}
+
+.movingBox {
+	width : 70px;
+	height : 30px;
+	text-align : center;
+	padding : 10px 0px 10px 0px;
+	background-color : #cccccc;
+	cursor : pointer;	
+}
+
+.movingBox:hover {
+	background-color : #008000;
+}
+
+#mNo1Source, #mNo1 {
+	position : absolute;
+	top : 40px;
+	left : 490px;
+}
+
+#mNo2Source, #mNo2 {
+	position : absolute;
+	top : 110px;
+	left : 490px;
+}
+
+#mNo3Source, #mNo3 {
+	position : absolute;
+	top : 180px;
+	left : 490px;
+}
+
+#mNo4Source, #mNo4 {
+	position : absolute;
+	top : 250px;
+	left : 490px;
+}
+
+#mNo1, #mNo2, #mNo3, #mNo4 {
+	z-index : 2;
+}
+
+#coinSlotBox {
+	position : absolute;
+	top : 270px;
+	left : 290px;
+	width : 150px;
+	height : 70px;
+}
